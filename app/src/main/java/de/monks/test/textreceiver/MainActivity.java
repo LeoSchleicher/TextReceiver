@@ -95,10 +95,13 @@ public class MainActivity extends AppCompatActivity {
 					// buffered read
 					ByteArrayOutputStream fout = new ByteArrayOutputStream();
 					while ((count = zis.read(buffer)) != -1) {
+						Log.d(TAG, "got "+count+" bytes!");
 						fout.write(buffer, 0, count);
 					}
 					String res = new String(fout.toByteArray(), "UTF-8");
+					Log.d(TAG, "String length: "+res.length());
 					Log.d(TAG, res);
+					CSVUtils.parse(res);
 				}
 			}
 			
@@ -107,6 +110,8 @@ public class MainActivity extends AppCompatActivity {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
